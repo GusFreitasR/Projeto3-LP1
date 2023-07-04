@@ -1,7 +1,7 @@
 #ifndef FUNCIONARIO_HPP
 #define FUNCIONARIO_HPP
 #include <iostream>
-#include "utils/util.hpp"
+#include "..\utils\util.hpp"
 
 class Funcionario {
     // Criando a classe funcionario

@@ -2,7 +2,7 @@
 #define EMPRESA_HPP
 #include <iostream>
 #include <vector>
-#include "utils/util.hpp"
+#include "..\utils\util.hpp"
 #include "gerente.hpp"
 #include "vendedor.hpp"
 #include "pessoa.hpp"
@@ -78,6 +78,12 @@ public:
     int calcularDias(std::string matricula, Date data);
     
     float calculaSalarioFuncionario(std::string matricula);
+
+    void atualizarAsg();
+
+    void atualizarVendedor();
+
+    void atualizarGerente();
 
     void calculaTodosOsSalarios();
 

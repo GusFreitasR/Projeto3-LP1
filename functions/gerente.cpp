@@ -1,6 +1,6 @@
 #include <iostream>
 #include "gerente.hpp"
-#include "utils/util.hpp"
+#include "..\utils\util.hpp"
 #include "funcionario.hpp"
 #include "pessoa.hpp"
 using namespace std;

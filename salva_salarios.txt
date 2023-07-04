@@ -1,7 +1,3 @@
-Nome do funcionario: Pedro de Araujo
-Cargo do funcionario: ASG
-Salario do funcionario: 1293.6
-------------------------------------------
 Nome do funcionario: Jorge Linhares
 Cargo do funcionario: ASG
 Salario do funcionario: 1586
@@ -9,6 +5,10 @@ Salario do funcionario: 1586
 Nome do funcionario: Antonio Augusto de Souza Filho
 Cargo do funcionario: ASG
 Salario do funcionario: 1347.4
+------------------------------------------
+Nome do funcionario: Pedro de Araujo
+Cargo do funcionario: ASG
+Salario do funcionario: 1293.6
 ------------------------------------------
 ******************************
 Nome do funcionario: Luiz de Souza

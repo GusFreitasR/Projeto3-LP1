@@ -1,7 +1,7 @@
 #ifndef VENDEDOR_HPP
 #define VENDEDOR_HPP
 #include <iostream>
-#include "utils/util.hpp"
+#include "..\utils\util.hpp"
 #include "pessoa.hpp"
 #include "funcionario.hpp"
 

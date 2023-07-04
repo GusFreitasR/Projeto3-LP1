@@ -1,5 +1,5 @@
 #include <iostream>
-#include "utils/util.hpp"
+#include "..\utils\util.hpp"
 #include "pessoa.hpp"
 #include "asg.hpp"
 #include "gerente.hpp"
@@ -122,6 +122,27 @@ void Empresa::carregarFuncoes()
             data.dia = stoi(datas);
 
             calcularRecisao(matricula, data);
+        }
+        else if (line == "demitirFuncionario()")
+        {
+            string matricula;
+            string datas;
+            Date data;
+
+            getline(file, matricula);
+
+            getline(file, datas);
+            data.ano = stoi(datas);
+            getline(file, datas);
+            data.mes = stoi(datas);
+            getline(file, datas);
+            data.dia = stoi(datas);
+
+            demitirFuncionario(matricula, data);
+        }
+        else if (line == "contratarFuncionario()")
+        {
+            contratarFuncionario();
         }
     }
 }
@@ -651,9 +672,69 @@ void Empresa::calculaTodosOsSalarios()
     cout << "Total de salarios dos funcionarios: " << total << endl;
 
     file.close();
+
+    ofstream relatorio("relatorioFinanceiro.txt");
+    relatorio<<"######### Relatório Financeiro #########"<<endl<<endl;
+    cout<<"######### Relatório Financeiro #########"<<endl<<endl;
+
+    relatorio<<"Cargo: ASG"<<endl;
+    cout<<"Cargo: ASG"<<endl;
+    for(auto i : asgs) {
+        relatorio<<i.getMatricula()<<" - "<<i.getNome()<<" - "<<i.calcularSalario()<<endl;
+        cout<<i.getMatricula()<<" - "<<i.getNome()<<" - "<<i.calcularSalario()<<endl;
+    }
+    relatorio<<"Total ASG: "<<asg_total<<endl<<endl;
+    cout<<"Total ASG: "<<asg_total<<endl<<endl;
+
+    relatorio<<"Cargo: Vendedor"<<endl;
+    cout<<"Cargo: Vendedor"<<endl;
+    for(auto i : vendedores) {
+        relatorio<<i.getMatricula()<<" - "<<i.getNome()<<" - "<<i.calcularSalario()<<endl;
+        cout<<i.getMatricula()<<" - "<<i.getNome()<<" - "<<i.calcularSalario()<<endl;
+    }
+    relatorio<<"Total Vendedor: "<<vendedor_total<<endl<<endl;
+    cout<<"Total Vendedor: "<<vendedor_total<<endl<<endl;
+
+    relatorio<<"Cargo: Gerente"<<endl;
+    cout<<"Cargo: Gerente"<<endl;
+    for(auto i : gerentes) {
+        relatorio<<i.getMatricula()<<" - "<<i.getNome()<<" - "<<i.calcularSalario()<<endl;
+        cout<<i.getMatricula()<<" - "<<i.getNome()<<" - "<<i.calcularSalario()<<endl;
+    }
+    relatorio<<"Total Gerente: "<<gerente_total<<endl<<endl;
+    cout<<"Total Gerente: "<<gerente_total<<endl<<endl;
+
+    relatorio<<"CUSTO TOTAL: R$ "<<total<<endl<<endl;
+    cout<<"CUSTO TOTAL: R$ "<<total<<endl<<endl;
+
+    relatorio<<"FATURAMENTO MENSAL: R$ "<<faturamentoMensal<<endl<<endl;
+    cout<<"FATURAMENTO MENSAL: R$ "<<faturamentoMensal<<endl<<endl;
+
+    relatorio<<"CUSTO ASG(%): "<<(asg_total/total)*100<<"%"<<endl;
+    relatorio<<"CUSTO Vendedor(%): "<<(vendedor_total/total)*100<<"%"<<endl;
+    relatorio<<"CUSTO Gerente(%): "<<(gerente_total/total)*100<<"%"<<endl<<endl;
+    cout<<"CUSTO ASG(%): "<<(asg_total/total)*100<<"%"<<endl;
+    cout<<"CUSTO Vendedor(%): "<<(vendedor_total/total)*100<<"%"<<endl;
+    cout<<"CUSTO Gerente(%): "<<(gerente_total/total)*100<<"%"<<endl<<endl;
+
+    float lucro = faturamentoMensal - total;
+    relatorio<<"LUCRO DA EMPRESA: "<<lucro<<endl<<endl;
+    cout<<"LUCRO DA EMPRESA: "<<lucro<<endl<<endl;
+
+    if(lucro >= 0) {
+        relatorio<<"SITUAÇÃO: Lucro"<<endl;
+        cout<<"SITUAÇÃO: Lucro"<<endl;
+    }
+    else {
+        relatorio<<"SITUAÇÃO: Prejuízo"<<endl;
+        cout<<"SITUAÇÃO: Prejuízo"<<endl;
+    }
+
+    relatorio.close();
 }
+
 //Função que calcula os anos de estadia de um certo funcionario dado a sua matricula e data de saída 
-int Empresa::calcularAnos(std::string matricula, Date data){
+int Empresa::calcularAnos(string matricula, Date data){
     for(auto asg = asgs.begin(); asg != asgs.end(); asg++) {
         if((*asg).getMatricula() == matricula){
             int diastotais = data.ano*365 + data.mes*30 + data.dia - (*asg).getIngressoEmpresa().ano*365 - (*asg).getIngressoEmpresa().mes*30 - (*asg).getIngressoEmpresa().dia;
@@ -682,7 +763,7 @@ int Empresa::calcularAnos(std::string matricula, Date data){
 
 //Função que calcula os meses de estadia de um certo funcionario dado a sua matricula e data de saída 
 
-int Empresa::calcularMeses(std::string matricula, Date data){
+int Empresa::calcularMeses(string matricula, Date data){
     for(auto asg = asgs.begin(); asg != asgs.end(); asg++) {
         if((*asg).getMatricula() == matricula){
             int diastotais = data.ano*365 + data.mes*30 + data.dia - (*asg).getIngressoEmpresa().ano*365 - (*asg).getIngressoEmpresa().mes*30 - (*asg).getIngressoEmpresa().dia;
@@ -713,7 +794,7 @@ int Empresa::calcularMeses(std::string matricula, Date data){
 }
 //Função que calcula os dias de estadia de um certo funcionario dado a sua matricula e data de saída 
 
-int Empresa::calcularDias(std::string matricula, Date data){
+int Empresa::calcularDias(string matricula, Date data){
     for(auto asg = asgs.begin(); asg != asgs.end(); asg++) {
         if((*asg).getMatricula() == matricula){
             int diastotais = data.ano*365 + data.mes*30 + data.dia - (*asg).getIngressoEmpresa().ano*365 - (*asg).getIngressoEmpresa().mes*30 - (*asg).getIngressoEmpresa().dia;
@@ -742,6 +823,141 @@ int Empresa::calcularDias(std::string matricula, Date data){
 
     return 0;
 }
+
+void Empresa::atualizarAsg(){
+        try {
+        ofstream arquivo("asg.txt");
+        
+            if (arquivo.is_open()) {
+            for(auto asg = asgs.begin(); asg!=asgs.end(); asg++){
+            arquivo << "#########################################################"<< endl;
+            arquivo << "ASG Nº: "<< asg - asgs.begin() << endl;
+            arquivo << "##### DADOS PESSOAIS #####" << endl;
+            arquivo << (*asg).getNome() << endl;
+            arquivo << (*asg).getCpf() << endl;
+            arquivo << (*asg).getQntFilhos()<< endl;
+            arquivo << (*asg).getEstadoCivil()<< endl;
+            arquivo << "***** Endereço (cidade, cep, bairro, rua e numero) ****"<< endl;
+            arquivo << (*asg).getEnderecoPessoal().cidade << endl;
+            arquivo << (*asg).getEnderecoPessoal().cep << endl;
+            arquivo << (*asg).getEnderecoPessoal().bairro << endl;
+            arquivo << (*asg).getEnderecoPessoal().rua << endl;
+            arquivo << (*asg).getEnderecoPessoal().numero << endl;
+            arquivo << "***** Data de nascimento (ano, mes, dia) ****"<< endl;
+            arquivo << (*asg).getDataNascimento().ano << endl;
+            arquivo << (*asg).getDataNascimento().mes << endl;
+            arquivo << (*asg).getDataNascimento().dia << endl;
+            arquivo << "##### DADOS FUNCIONAIS #####"<< endl;
+            arquivo << (*asg).getMatricula()<< endl;
+            arquivo << (*asg).getSalario() << endl;
+            arquivo << (*asg).getAdicionalInsalubridade() << endl;
+            arquivo << (*asg).getFaltas() << endl;
+            arquivo << "***** Data de ingresso (ano, mes, dia) ****"<< endl;
+            arquivo << (*asg).getIngressoEmpresa().ano << endl;
+            arquivo << (*asg).getIngressoEmpresa().mes << endl;
+            arquivo << (*asg).getIngressoEmpresa().dia << endl;
+            }
+
+            arquivo.close();
+            cout << "Asgs atualizados com sucesso!" << endl;
+        } else {
+            throw runtime_error("Erro ao abrir o arquivo.");
+        }
+    } catch (exception& ex) {
+        cerr << "Erro: " << ex.what() << endl;
+    }
+}
+
+void Empresa::atualizarVendedor() {
+    try {
+        ofstream arquivo("vendedor.txt");
+
+        if (arquivo.is_open()) {
+            for (auto vend = vendedores.begin(); vend != vendedores.end(); vend++) {
+                arquivo << "#########################################################" << endl;
+                arquivo << "VENDEDOR Nº: " << vend - vendedores.begin() << endl;
+                arquivo << "##### DADOS PESSOAIS #####"<< endl;
+                arquivo << (*vend).getNome() << endl;
+                arquivo << (*vend).getCpf() << endl;
+                arquivo << (*vend).getQntFilhos() << endl;
+                arquivo << (*vend).getEstadoCivil() << endl;
+                arquivo << "***** Endereço (cidade, cep, bairro, rua e numero) ****" << endl;
+                arquivo << (*vend).getEnderecoPessoal().cidade << endl;
+                arquivo << (*vend).getEnderecoPessoal().cep << endl;
+                arquivo << (*vend).getEnderecoPessoal().bairro << endl;
+                arquivo << (*vend).getEnderecoPessoal().rua << endl;
+                arquivo << (*vend).getEnderecoPessoal().numero << endl;
+                arquivo << "***** Data de nascimento (ano, mes, dia) ****"<< endl;
+                arquivo << (*vend).getDataNascimento().ano << endl;
+                arquivo << (*vend).getDataNascimento().mes << endl;
+                arquivo << (*vend).getDataNascimento().dia << endl;
+                arquivo << "##### DADOS FUNCIONAIS #####"<< endl;
+                arquivo << (*vend).getMatricula() << endl;
+                arquivo << (*vend).getSalario() << endl;
+                arquivo << (*vend).getTipoVendedor() << endl;
+                arquivo << (*vend).getFaltas() << endl;
+                arquivo << "***** Data de ingresso (ano, mes, dia) ****"<< endl;
+                arquivo << (*vend).getIngressoEmpresa().ano << endl;
+                arquivo << (*vend).getIngressoEmpresa().mes << endl;
+                arquivo << (*vend).getIngressoEmpresa().dia << endl;
+            }
+
+            arquivo.close();
+            cout << "Vendedores atualizados com sucesso!" <<endl;
+        } else {
+            throw runtime_error("Erro ao abrir o arquivo.");
+        }
+    } catch (exception& ex) {
+        cerr << "Erro: " << ex.what() << endl;
+    }
+}
+
+void Empresa::atualizarGerente() {
+    try {
+        ofstream arquivo("gerente.txt");
+
+        if (arquivo.is_open()) {
+            for (auto gen = gerentes.begin(); gen != gerentes.end(); gen++) {
+                arquivo << "#########################################################" << endl;
+                arquivo << "GERENTE Nº: " << gen - gerentes.begin() << endl;
+                arquivo << "##### DADOS PESSOAIS #####"<< endl;
+                arquivo << (*gen).getNome() << endl;
+                arquivo << (*gen).getCpf() << endl;
+                arquivo << (*gen).getQntFilhos() << endl;
+                arquivo << (*gen).getEstadoCivil() << endl;
+                arquivo << "***** Endereço (cidade, cep, bairro, rua e numero) ****" << endl;
+                arquivo << (*gen).getEnderecoPessoal().cidade << endl;
+                arquivo << (*gen).getEnderecoPessoal().cep << endl;
+                arquivo << (*gen).getEnderecoPessoal().bairro << endl;
+                arquivo << (*gen).getEnderecoPessoal().rua << endl;
+                arquivo << (*gen).getEnderecoPessoal().numero << endl;
+                arquivo << "***** Data de nascimento (ano, mes, dia) ****"<< endl;
+                arquivo << (*gen).getDataNascimento().ano << endl;
+                arquivo << (*gen).getDataNascimento().mes << endl;
+                arquivo << (*gen).getDataNascimento().dia << endl;
+                arquivo << "##### DADOS FUNCIONAIS #####"<< endl;
+                arquivo << (*gen).getMatricula() << endl;
+                arquivo << (*gen).getSalario() << endl;
+                arquivo << (*gen).getParticipacaoLucros() << endl;
+                arquivo << (*gen).getFaltas() << endl;
+                arquivo << "***** Data de ingresso (ano, mes, dia) ****"<< endl;
+                arquivo << (*gen).getIngressoEmpresa().ano << endl;
+                arquivo << (*gen).getIngressoEmpresa().mes << endl;
+                arquivo << (*gen).getIngressoEmpresa().dia << endl;
+            }
+
+            arquivo.close();
+            cout << "Gerentes atualizados com sucesso!" << endl;
+        } else {
+            throw runtime_error("Erro ao abrir o arquivo.");
+        }
+    } catch (const exception& ex) {
+        cerr << "Erro: " << ex.what() << endl;
+    }
+}
+
+
+
 
 
 void Empresa::demitirFuncionario(string matricula, Date desligamento) {
@@ -780,6 +996,7 @@ void Empresa::demitirFuncionario(string matricula, Date desligamento) {
             file.close();
 
             asgs.erase(asg);
+            atualizarAsg();
             return;
         }
     }
@@ -818,6 +1035,9 @@ void Empresa::demitirFuncionario(string matricula, Date desligamento) {
             file.close();
 
             vendedores.erase(vend);
+            
+    
+            atualizarVendedor();
             return;
         }
     }
@@ -856,9 +1076,13 @@ void Empresa::demitirFuncionario(string matricula, Date desligamento) {
             file.close();
 
             gerentes.erase(ger);
+            cout << "Funcionário demitido com sucesso. Relatório demissional gerado." << endl;
+            atualizarGerente();
+            
             return;
         }
     }
+    cout << "Não existe funcionario com essa matricula" << endl;
 }
 
 void Empresa::contratarFuncionario() {
@@ -867,6 +1091,7 @@ void Empresa::contratarFuncionario() {
     getline(file, line);
     if(line == "ASG"){
         Asg asg;
+        getline(file, line);
         getline(file, line);
         asg.setNome(line);
         getline(file, line);
@@ -926,6 +1151,7 @@ void Empresa::contratarFuncionario() {
 
         asgs.push_back(asg);
 
+        atualizarAsg();
         return;
     }
     if(line == "Vendedor") {
@@ -988,7 +1214,8 @@ void Empresa::contratarFuncionario() {
         vendedor.setIngressoEmpresa(date_ing);
 
         vendedores.push_back(vendedor);
-
+        
+        atualizarVendedor();
         return;
     }
     if(line == "Gerente") {
@@ -1051,7 +1278,7 @@ void Empresa::contratarFuncionario() {
         gerente.setIngressoEmpresa(date_ing);
 
         gerentes.push_back(gerente);
-
+        atualizarGerente();
         return;
     }
 }

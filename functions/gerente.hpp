@@ -3,7 +3,7 @@
 #include <iostream>
 #include "funcionario.hpp"
 #include "pessoa.hpp"
-#include "utils/util.hpp"
+#include "..\utils\util.hpp"
 using namespace std;
 
 // Criando a classe gerente herdando das classes pessoa e funcionario
