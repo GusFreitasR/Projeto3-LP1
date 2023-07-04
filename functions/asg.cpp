@@ -5,24 +5,35 @@
 #include "pessoa.hpp"
 using namespace std;
 
-// Implementando os construtores
-Asg::Asg() {
+/// \brief Construtor vazio
+Asg::Asg() {}
 
-}
+/**
+* \brief Construtor com atributo de adicional de insalubridade.
+* \param adicional valor do adicional.
+*/
 Asg::Asg(float adicional) {
      this->adicionalInsalubridade=adicional;
       }
 
-// Implementando getters e setters 
+/// @brief Método get do atributo adicional de insalubridade. 
 float Asg::getAdicionalInsalubridade() { 
     return this->adicionalInsalubridade; 
     }
+/**
+* \brief Método set do atributo adicional de insalubridade.  
+* \param adicional valor do adicional.
+*/
 void Asg::setAdicionalInsalubridade(float adicional) { 
     this->adicionalInsalubridade=adicional;
      }
 
 // Implementando os métodos herdados
 
+/**
+* \brief Cálcula o salário final, levando em conta faltas e adicionais.
+* \return O valor final do salário.
+*/
 float Asg::calcularSalario() {
 
     float salario=stof(getSalario());
@@ -35,6 +46,11 @@ float Asg::calcularSalario() {
     return salario;
 }
 
+/**
+* \brief Calcula o valor da recisão de um funcionário em função de uma data.
+* \param desligamento Data do desligamento do funcionário.
+* \return O valor da recisão.
+*/
 float Asg::calcularRecisao(Date desligamento) {
     float dias_off, dias_ingresso;
 

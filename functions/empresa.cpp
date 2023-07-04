@@ -10,8 +10,17 @@
 
 using namespace std;
 
-// Implementando os construtores
+//=== Construtores
+
+/// \brief Construtor vazio. 
 Empresa::Empresa() {}
+
+/**
+* \brief Construtor parametrizado.
+* \param nome Nome fantasia da empresa.
+* \param cnpj CNPJ da empresa.
+* \param faturamento Faturamento mensal da empresa.
+*/  
 Empresa::Empresa(string nome, string cnpj, float faturamento)
 {
     this->cnpj = cnpj;
@@ -19,46 +28,94 @@ Empresa::Empresa(string nome, string cnpj, float faturamento)
     this->nomeEmpresa = nome;
 }
 
-// Implementando os getters e setters da empresa
+//=== Getters e setters da classe empresa.
+
+/**
+* \brief Obtém o faturamento mensal da empresa.
+* \return O faturamento mensal da empresa.
+*/
 float Empresa::getFaturamentoMensal()
 {
     return this->faturamentoMensal;
 }
+
+/**
+* \brief Define o faturamento mensal da empresa.
+* \param faturamento O faturamento mensal da empresa.
+*/
 void Empresa::setFaturamentoMensal(float faturamento)
 {
     this->faturamentoMensal = faturamento;
 }
+
+/**
+* \brief Obtém o nome da empresa.
+* \return O nome da empresa.
+*/
 string Empresa::getNomeEmpresa()
 {
     return this->nomeEmpresa;
 }
+
+/**
+* \brief Define o nome da empresa.
+* \param nome O nome da empresa.
+*/
 void Empresa::setNomeEmpresa(string nome)
 {
     this->nomeEmpresa = nome;
 }
+
+/**
+* \brief Obtém o CNPJ da empresa.
+* \return O CNPJ da empresa.
+*/
 string Empresa::getCnpj()
 {
     return this->cnpj;
 }
+
+/**
+* \brief Define o CNPJ da empresa.
+* \param cnpj O CNPJ da empresa.
+*/
 void Empresa::setCnpj(string cnpj)
 {
     this->cnpj = cnpj;
 }
+
+/**
+* \brief Obtém os ASGs (Assistentes de Serviços Gerais) da empresa.
+* \return Um vetor contendo os ASGs da empresa.
+*/
 vector<Asg> Empresa::getAsgs()
 {
     return this->asgs;
 }
+
+/**
+* \brief Obtém os vendedores da empresa.
+* \return Um vetor contendo os vendedores da empresa.
+*/
 vector<Vendedor> Empresa::getVendedores()
 {
     return this->vendedores;
 }
+
+/**
+* \brief Obtém os gerentes da empresa.
+* \return Um vetor contendo os gerentes da empresa.
+*/
 vector<Gerente> Empresa::getGerentes()
 {
     return this->gerentes;
 }
 
-//Implementando as funcoes da empresa
-//Implementação da função em que carrega as chamadas de funcoes do arquivo 'funcoes.txt'
+//=== Funções da empresa
+
+/**
+* \brief Carrega as chamadas de funções a partir de um arquivo.
+*/
 void Empresa::carregarFuncoes()
 {
     ifstream file("funcoes.txt");
@@ -146,7 +203,10 @@ void Empresa::carregarFuncoes()
         }
     }
 }
-//implementação da função em que carrega as informacoes do dono da empresa
+
+/**
+* \brief Carrega os dados pessoais e profissionais do dono da empresa a partir de um arquivo.
+*/
 void Empresa::carregaDono()
 {
     ifstream file("dono.txt");
@@ -201,8 +261,10 @@ void Empresa::carregaDono()
 
     file.close();
 }
-//implementação da função em que carrega as informacoes  da empresa
 
+/**
+* \brief Carrega as informações da empresa a partir de um arquivo.
+*/
 void Empresa::carregarEmpresa()
 {
     ifstream file("empresa.txt");
@@ -225,8 +287,10 @@ void Empresa::carregarEmpresa()
 
     file.close();
 }
-//implementação da função em que carrega as informacoes dos asgs da empresa
 
+/**
+* \brief Carrega os dados pessoais e profissionais dos asgs da empresa a partir de um arquivo.
+*/
 void Empresa::carregarAsg()
 {
     ifstream file("asg.txt");
@@ -305,8 +369,10 @@ void Empresa::carregarAsg()
 
     file.close();
 }
-//implementação da função em que carrega as informacoes dos vendedores da empresa
 
+/**
+* \brief Carrega os dados pessoais e profissionais dos vendedores da empresa a partir de um arquivo.
+*/
 void Empresa::carregarVendedor()
 {
     ifstream file("vendedor.txt");
@@ -386,8 +452,10 @@ void Empresa::carregarVendedor()
 
     file.close();
 }
-//implementação da função em que carrega as informacoes dos gerentes da empresa
 
+/**
+* \brief Carrega os dados pessoais e profissionais dos gerentes da empresa a partir de um arquivo.
+*/
 void Empresa::carregarGerente()
 {
     ifstream file("gerente.txt");
@@ -466,8 +534,10 @@ void Empresa::carregarGerente()
 
     file.close();
 }
-//implementação da função em que faz a impressão dos asgs depois de carregados
 
+/**
+ * \brief Função que imprime a lista de profissionais ASG carregados.
+ */
 void Empresa::imprimeAsgs()
 {
     cout << "Lista de profissionais ASG:" << endl;
@@ -487,7 +557,10 @@ void Empresa::imprimeAsgs()
         cout << "**********************************" << endl;
     }
 }
-//implementação da função em que faz a impressão dos vendedores depois de carregados
+
+/**
+ * \brief Função que imprime a lista de profissionais ASG carregados.
+ */
 void Empresa::imprimeVendedores()
 {
     cout << "Lista de vendedores:" << endl;
@@ -507,7 +580,10 @@ void Empresa::imprimeVendedores()
         cout << "**********************************" << endl;
     }
 }
-//implementação da função em que faz a impressão dos gerentes depois de carregados
+
+/**
+ * \brief Função que imprime a lista de profissionais ASG carregados.
+ */
 void Empresa::imprimeGerentes()
 {
     cout << "Lista de gerentes:" << endl;
@@ -527,7 +603,10 @@ void Empresa::imprimeGerentes()
         cout << "**********************************" << endl;
     }
 }
-//implementação da função em que faz a impressão do dono da empresa
+
+/**
+ * \brief Função que imprime a lista de profissionais ASG carregados.
+ */
 void Empresa::imprimeDono()
 {
     cout << "****************************" << endl;
@@ -540,8 +619,12 @@ void Empresa::imprimeDono()
     cout << "Numero de filhos: " << dono.getQntFilhos() << endl;
     cout << "****************************" << endl;
 }
-//implementação da função em que faz a busca de uma matricula nos dados de funcionario da empresa
 
+/**
+ * \brief Função que busca um funcionário na empresa pelo número de matrícula.
+ * \param matricula A matrícula do funcionário a ser buscado.
+ * \return Retorna true se o funcionário for encontrado, caso contrário, retorna false.
+ */
 bool Empresa::buscaFuncionario(string matricula)
 {
     for (auto i : asgs)
@@ -571,7 +654,12 @@ bool Empresa::buscaFuncionario(string matricula)
     cout << "Nao existe um funcionario com essa matricula em nosso sistema" << endl;
     return false;
 }
-//implementação da função em que calcula o salario de um funcionario dado a matricula dele
+
+/**
+ * \brief Função que calcula o salário de um funcionário com base no número de matrícula.
+ * \param matricula A matrícula do funcionário.
+ * \return Retorna o valor do salário do funcionário se encontrado, caso contrário, retorna -1.
+ */
 float Empresa::calculaSalarioFuncionario(string matricula)
 {
     for (auto i : asgs)
@@ -602,7 +690,9 @@ float Empresa::calculaSalarioFuncionario(string matricula)
     return -1;
 }
 
-//implementação da função em que calcula o salario de todos os funcionarios da empresa e salva em um arquivo 
+/**
+ * \brief Função que calcula o salário de todos os funcionários da empresa e salva em um arquivo.
+ */
 void Empresa::calculaTodosOsSalarios()
 {
     float total = 0, asg_total = 0, vendedor_total = 0, gerente_total = 0;
@@ -733,7 +823,13 @@ void Empresa::calculaTodosOsSalarios()
     relatorio.close();
 }
 
-//Função que calcula os anos de estadia de um certo funcionario dado a sua matricula e data de saída 
+/**
+ * \brief Calcula os anos de estadia de um certo funcionário dado a sua matrícula e data de saída.
+ * 
+ * \param matricula A matrícula do funcionário.
+ * \param data A data de saída.
+ * \return O número de anos de estadia do funcionário.
+ */
 int Empresa::calcularAnos(string matricula, Date data){
     for(auto asg = asgs.begin(); asg != asgs.end(); asg++) {
         if((*asg).getMatricula() == matricula){
@@ -761,8 +857,13 @@ int Empresa::calcularAnos(string matricula, Date data){
     return 0;
 }
 
-//Função que calcula os meses de estadia de um certo funcionario dado a sua matricula e data de saída 
-
+/**
+ * \brief Calcula os meses de estadia de um certo funcionário dado a sua matrícula e data de saída.
+ * 
+ * \param matricula A matrícula do funcionário.
+ * \param data A data de saída.
+ * \return O número de meses de estadia do funcionário.
+ */
 int Empresa::calcularMeses(string matricula, Date data){
     for(auto asg = asgs.begin(); asg != asgs.end(); asg++) {
         if((*asg).getMatricula() == matricula){
@@ -792,8 +893,14 @@ int Empresa::calcularMeses(string matricula, Date data){
 
     return 0;
 }
-//Função que calcula os dias de estadia de um certo funcionario dado a sua matricula e data de saída 
 
+/**
+ * \brief Calcula os dias de estadia de um certo funcionário dado a sua matrícula e data de saída.
+ * 
+ * \param matricula A matrícula do funcionário.
+ * \param data A data de saída.
+ * \return O número de dias de estadia do funcionário.
+ */
 int Empresa::calcularDias(string matricula, Date data){
     for(auto asg = asgs.begin(); asg != asgs.end(); asg++) {
         if((*asg).getMatricula() == matricula){
@@ -824,6 +931,9 @@ int Empresa::calcularDias(string matricula, Date data){
     return 0;
 }
 
+/**
+* \brief Atualiza o arquivo externo de asg's com os dados atuais.
+*/
 void Empresa::atualizarAsg(){
         try {
         ofstream arquivo("asg.txt");
@@ -868,6 +978,9 @@ void Empresa::atualizarAsg(){
     }
 }
 
+/**
+* \brief Atualiza o arquivo externo de vendedores com os dados atuais.
+*/
 void Empresa::atualizarVendedor() {
     try {
         ofstream arquivo("vendedor.txt");
@@ -912,6 +1025,9 @@ void Empresa::atualizarVendedor() {
     }
 }
 
+/**
+* \brief Atualiza o arquivo externo de gerentes com os dados atuais.
+*/
 void Empresa::atualizarGerente() {
     try {
         ofstream arquivo("gerente.txt");
@@ -956,10 +1072,12 @@ void Empresa::atualizarGerente() {
     }
 }
 
-
-
-
-
+/**
+ * \brief Demite um funcionário com base em sua matrícula e data de desligamento.
+ *
+ * \param matricula A matrícula do funcionário a ser demitido.
+ * \param desligamento A data de desligamento do funcionário.
+ */
 void Empresa::demitirFuncionario(string matricula, Date desligamento) {
     for(auto asg = asgs.begin(); asg != asgs.end(); asg++) {
         if((*asg).getMatricula() == matricula) {
@@ -1085,6 +1203,10 @@ void Empresa::demitirFuncionario(string matricula, Date desligamento) {
     cout << "Não existe funcionario com essa matricula" << endl;
 }
 
+/**
+ * \brief Contrata um novo funcionário com base nas informações fornecidas em um arquivo.
+ * O formato do arquivo deve seguir um padrão específico.
+ */
 void Empresa::contratarFuncionario() {
     ifstream file("novoFuncionario.txt");
     string line;
@@ -1282,7 +1404,14 @@ void Empresa::contratarFuncionario() {
         return;
     }
 }
-//implementação da função em que se tem o calcula da recisão de algum funcionario dado sua matricula e a data de seu desligamento 
+
+/**
+ * \brief Calcula o valor da rescisão de um funcionário com base em sua matrícula e data de desligamento.
+ *
+ * \param matricula A matrícula do funcionário.
+ * \param date_off A data de desligamento do funcionário.
+ * \return O valor da rescisão do funcionário.
+ */
 float Empresa::calcularRecisao(string matricula, Date date_off)
 {
     for (auto i : asgs)

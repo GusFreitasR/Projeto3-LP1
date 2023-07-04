@@ -5,22 +5,37 @@
 #include "pessoa.hpp"
 using namespace std;
 
-//Implementando os construtores
+//=== Construtores
+
+/// \brief Construtor vazio.
 Gerente::Gerente() {}
 
+/**
+* \brief Construtor parametrizado com o atributo lucro da empresa. 
+* \param lucro lucro da empresa.
+*/  
 Gerente::Gerente(float lucro) {
      this->participacaoLucros=lucro;
-      }
+}
 
-//Implementando os getters e setters da classe
+//=== Getters e setters da classe Gerente
+
+/// \brief Método get do atributo participação nos lucros. 
 float Gerente::getParticipacaoLucros() {
      return this->participacaoLucros; 
-     }
+}
+
+/// \brief Método set do atributo participação nos lucros.
 void Gerente::setParticipacaoLucros(float lucro) { 
     this->participacaoLucros=lucro; 
     }
 
-//Implementando os métodos herdados
+//=== Métodos herdados
+
+/**
+* \brief Calcula o salário final de um gerente levando em conta faltas, quantidade de filhos e participação nos lucros.
+* \return Salário final do gerente.
+*/ 
 float Gerente::calcularSalario() {
 
     int diasfaltas=getFaltas();
@@ -36,6 +51,11 @@ float Gerente::calcularSalario() {
     return salario;
 }
 
+/**
+* \brief Calcula valor da recisão de um gerente a partir de sua data de desligamento.
+* \param desligamento Data de desligamento.
+* \return Valor final da recisão.
+*/
 float Gerente::calcularRecisao(Date desligamento) {
 
     float dias_off, dias_ingresso;

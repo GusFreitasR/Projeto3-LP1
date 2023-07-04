@@ -5,27 +5,37 @@
 #include "pessoa.hpp"
 using namespace std;
 
-// Implementando os construtores
-Vendedor::Vendedor()
-{
-}
+//=== Construtores
+
+/// \brief Construtor vazio. 
+Vendedor::Vendedor(){}
+
+/// \brief Construtor parametrizado com o tipo do vendedor.
 Vendedor::Vendedor(char tipo)
 {
     this->tipoVendedor = tipo;
 }
 
-// implementando os getters e setters
+//=== Getters e setters
+
+/// \brief Método get do atributo tipo do vendedor.
 char Vendedor::getTipoVendedor()
 {
     return this->tipoVendedor;
 }
+
+/// \brief Método set do atributo tipo do vendedor.
 void Vendedor::setTipoVendedor(char tipo)
 {
     this->tipoVendedor = tipo;
 }
 
-// implementando os métodos herdados
+//=== Métodos herdados
 
+/**
+* \brief Calcula o salário final de um vendedor levando em conta faltas, quantidade de filhos e adicional por tipo de vendedor.
+* \return O valor final do salário.
+*/
 float Vendedor::calcularSalario()
 {
     int diasFaltas = getFaltas();
@@ -49,6 +59,12 @@ float Vendedor::calcularSalario()
     salario += getQntFilhos() * 100;
     return salario;
 }
+
+/**
+* \brief Calcula o valor da recisão de um funcionário a partir de uma data desligamento.
+* \param desligamento Data de desligamento.
+* \return O valor final da recisão.
+*/
 float Vendedor::calcularRecisao(Date desligamento)
 {
     float dias_off, dias_ingresso;
