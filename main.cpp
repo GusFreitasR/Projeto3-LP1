@@ -1,3 +1,8 @@
+/**
+* \file main.cpp
+* \authors Emanuel Kywal, Marcos Vinícius e Gustavo Freitas.
+* \date 04-07-2023
+*/    
 
 #include <iostream>
 
